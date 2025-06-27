@@ -8,6 +8,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import './globals.css';
 import { initGoogleTranslate, ensureTranslation } from '@/app/utils/googleTranslateHelper';
 
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     initGoogleTranslate();
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta charSet="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>Freelance Marketplace</title>
+        <link rel="icon" href="/dlogo.png"></link>
         <meta
           name="description"
           content="Connect with skilled freelancers to get your projects done quickly and efficiently."

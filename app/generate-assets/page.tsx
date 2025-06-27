@@ -287,7 +287,7 @@ function StepIndicator({ currentStep, totalSteps }: { currentStep: number, total
           <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 ${i < currentStep
             ? 'bg-green-500 border-green-500 text-white'
             : i === currentStep
-              ? 'bg-primary-600 border-primary-600 text-white'
+              ? 'bg-primary-600 border-primary-600 text-gray-400'
               : 'bg-gray-100 border-gray-300 text-gray-400'
             }`}>
             {i < currentStep ? <FiCheck className="w-5 h-5" /> : i + 1}
@@ -435,7 +435,10 @@ function Step2PromptInput({
 
   const fetchVideos = async () => {
     try {
-      const res = await fetch('/api/videos');
+      const res = await fetch('/api/videos', {
+        method: "GET",
+        cache: 'no-store'
+      });
       const data = await res.json();
       setVideos(data);
     } catch (err) {
@@ -786,13 +789,13 @@ function Step2PromptInput({
         >
           <FiArrowLeft className="w-5 h-5" /> Back
         </button>
-        <button
+        {assetType !== 'video' && <button
           onClick={onNext}
           disabled={!prompt.trim()}
           className="flex items-center gap-2 bg-primary-600 text-white px-8 py-3 rounded-lg font-medium hover:bg-primary-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
         >
           Generate Asset <FiZap className="w-5 h-5" />
-        </button>
+        </button>}
       </div>
     </div>
   );
@@ -1216,14 +1219,14 @@ export default function AiAssetGeneratorPage() {
 
         {/* Premium Upgrade Banner */}
         {!userSubscription.isPremium && (
-          <div className="bg-gradient-to-r from-primary-600 to-indigo-600 rounded-2xl p-8 text-white text-center shadow-xl">
+          <div className="bg-gradient-to-r from-primary-600 to-indigo-600 rounded-2xl p-8 text-zinc-700 text-center shadow-xl">
             <h3 className="text-2xl font-bold mb-4">Unlock Premium Features</h3>
             <p className="text-primary-100 mb-6 max-w-2xl mx-auto">
               Get access to all asset types, unlimited downloads, and advanced editing tools
             </p>
             <button
               onClick={() => router.push('/pricing')}
-              className="bg-white text-primary-600 px-8 py-3 rounded-lg font-semibold hover:bg-gray-100 transition-all hover:scale-105"
+              className="text-primary-600 px-8 py-3 rounded-lg font-semibold bg-gray-100 hover:bg-gray-200 transition-all hover:scale-105"
             >
               View Pricing Plans
             </button>
